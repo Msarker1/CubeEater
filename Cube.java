@@ -14,6 +14,5 @@ public class Cube {
 	
 	public void Delete(Graphics g,int xCoor, int yCoor){
 		g.clearRect(xCoor, yCoor, WIDTH, HEIGHT);
-		
 	}
 }
