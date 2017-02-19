@@ -12,78 +12,76 @@ public  class Move extends Applet implements KeyListener , Runnable{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
-	private Oval oval;
+	
+	private Player player;
 	private Cube cube;
+	private Cube cube2;
+	private Point point;
+	
 	private boolean running ,moved = false;
 	private Thread thread;
+	
 	final int WIDTH = 800, HEIGHT = 400;
+	
 	private int xCoor = 0, yCoor = 0;
 	private int X=800,Y=0,Z=0, P=0;
 	
 	private Random random= new Random();
 	private Random rand1= new Random();
 	private Random rand2= new Random();
-	int xc = rand1.nextInt(350);
-	int yc = rand2.nextInt(350);
-	int temp = random.nextInt(400)+100;
-	Cube cube2;
-	Point point;
+	
+	int xc= rand1.nextInt(350);
+	int	yc = rand2.nextInt(350);
+
+	
 	
 	public void init(){
 		this.resize(WIDTH, HEIGHT);
-		
 		addKeyListener(this);
-		oval = new Oval();
+		
+		player = new Player();
 		cube = new Cube();
 		cube2 = new Cube();
 		point = new Point();
-
-	}
-	
-	public void paint( Graphics g){
-	
-		
-		g.setColor(Color.BLACK);
-		g.fillRect(0, 0, WIDTH, HEIGHT);
-		oval.draw(g, xCoor, yCoor);
-		cube.Draw(g,X ,Y );
-		cube2.Draw(g,X,Z);
-		point.draw(g, 340, 10);
-		System.out.println(xCoor);
-		System.out.println(yCoor);
-		if(X==-400){  
-		X=800;
-		Y = random.nextInt(350);
-		
-		Z = random.nextInt(350);
-		
-		}
-		if((xCoor == 340) && (yCoor == 10)){
-			point.draw(g, 360, 150);
-			P++;
-		}
-	}
-	
-	public void update(){
-			
-		if(moved){
-			X--;
-		}
-		
-	}
-	
-	public void udp(){
-		int xc = rand1.nextInt(350);
-		int yc = rand2.nextInt(350);
-	}
-	
-	
-	public void start(){
+		this.setBackground(Color.BLACK);
 		running = true;
 		thread = new Thread(this);
 		thread.start();
 	}
+
+	
+	public void paint( Graphics g){
+		
+		
+		player.draw(g, xCoor, yCoor);
+		cube.Draw(g,X ,Y );
+		cube2.Draw(g,X,Z);
+		g.setColor(Color.GREEN);
+		g.drawString("Score : "+ P+"", 700, 10);
+		
+		if(X==-400){ 
+			X=800;
+			Y = random.nextInt(350);
+			Z = random.nextInt(350);
+		
+		}
+		if((((xCoor>xc-30) && (xCoor <xc+30))) && ((yCoor<yc+30) && (yCoor)>yc-30)){
+			xc = rand1.nextInt(350);
+			yc = rand2.nextInt(350);
+			
+			point.delete(g, xc, yc);
+			P++;
+		}
+			point.draw(g, xc, yc);	
+	}
+	
+	
+	public void uppdate(){
+		if(moved){
+			X--;
+		}
+	}
+	
 		
 	
 	public void keyPressed(KeyEvent e) {
@@ -125,7 +123,7 @@ public  class Move extends Applet implements KeyListener , Runnable{
 	public void run() {
 		while(running){
 			repaint();
-			update();
+			uppdate();
 			try {
 				Thread.sleep(5);
 			} catch (InterruptedException e) {
