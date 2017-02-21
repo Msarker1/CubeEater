@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.LinkedList;
 
 public class Cube {
 	
@@ -14,5 +13,6 @@ public class Cube {
 	
 	public void Delete(Graphics g,int xCoor, int yCoor){
 		g.clearRect(xCoor, yCoor, WIDTH, HEIGHT);
+		
 	}
 }

@@ -17,6 +17,7 @@ public  class Move extends Applet implements KeyListener , Runnable{
 	private Cube cube;
 	private Cube cube2;
 	private Point point;
+	private Score score;
 	
 	private boolean running ,moved = false;
 	private Thread thread;
@@ -30,8 +31,8 @@ public  class Move extends Applet implements KeyListener , Runnable{
 	private Random rand1= new Random();
 	private Random rand2= new Random();
 	
-	int xc= rand1.nextInt(350);
-	int yc = rand2.nextInt(350);
+	int xc = rand1.nextInt(350);
+	int	yc = rand2.nextInt(350);
 
 	
 	
@@ -43,6 +44,7 @@ public  class Move extends Applet implements KeyListener , Runnable{
 		cube = new Cube();
 		cube2 = new Cube();
 		point = new Point();
+		score = new Score();
 		this.setBackground(Color.BLACK);
 		running = true;
 		thread = new Thread(this);
@@ -50,33 +52,54 @@ public  class Move extends Applet implements KeyListener , Runnable{
 	}
 
 	
+	@SuppressWarnings("deprecation")
 	public void paint( Graphics g){
-		
-		
+
 		player.draw(g, xCoor, yCoor);
 		cube.Draw(g,X ,Y );
-		cube2.Draw(g,X,Z);
-		g.setColor(Color.GREEN);
-		g.drawString("Score : "+ P+"", 700, 10);
+		//cube2.Draw(g,X,Z);
 		
+		System.out.println("xCoor: "+xCoor);
+		System.out.println("yCoor: "+yCoor);
+		System.out.println("xCube: "+X);
+		System.out.println("Ycube:"+Y);
+		
+		point.draw(g, xc, yc);
+		
+			
 		if(X==-400){ 
 			X=800;
 			Y = random.nextInt(350);
 			Z = random.nextInt(350);
 		
 		}
+		
+		if((xCoor>770)|(xCoor<0)|(yCoor<0)|(yCoor>370)){
+			g.setColor(Color.RED);
+			g.drawString("YOU LOSE ", 350, 200);
+			thread.stop();
+		}
+		
+		if((xCoor>X-30)&&(xCoor<X+400)&& ((yCoor>Y-30)&&(yCoor<Y+50))){
+			g.setColor(Color.RED);
+			g.drawString("YOU LOSE ", 350, 200);
+			thread.stop();
+		}
+		
 		if((((xCoor>xc-30) && (xCoor <xc+30))) && ((yCoor<yc+30) && (yCoor)>yc-30)){
 			xc = rand1.nextInt(350);
 			yc = rand2.nextInt(350);
 			
 			point.delete(g, xc, yc);
 			P++;
+			point.draw(g, xc, yc);
 		}
-			point.draw(g, xc, yc);	
+			score.draw(g, P);
+	
 	}
 	
 	
-	public void uppdate(){
+	public void update(){
 		if(moved){
 			X--;
 		}
@@ -123,7 +146,7 @@ public  class Move extends Applet implements KeyListener , Runnable{
 	public void run() {
 		while(running){
 			repaint();
-			uppdate();
+			update();
 			try {
 				Thread.sleep(5);
 			} catch (InterruptedException e) {

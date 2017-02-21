@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 
-public class Player{
+public class Player {
 
 	final int WIDTH = 30 , HEIGHT = 30;
 	
