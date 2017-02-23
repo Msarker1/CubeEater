@@ -35,7 +35,6 @@ public  class Move extends Applet implements KeyListener , Runnable{
 	int	yc = rand2.nextInt(350);
 
 	
-	
 	public void init(){
 		this.resize(WIDTH, HEIGHT);
 		addKeyListener(this);
