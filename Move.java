@@ -75,13 +75,13 @@ public  class Move extends Applet implements KeyListener , Runnable{
 		}
 		
 		if((xCoor>770)|(xCoor<0)|(yCoor<0)|(yCoor>370)){
-			g.setColor(Color.RED);
+			g.setColor(Color.BLUE);
 			g.drawString("YOU LOSE ", 350, 200);
 			thread.stop();
 		}
 		
 		if((xCoor>X-30)&&(xCoor<X+400)&& ((yCoor>Y-30)&&(yCoor<Y+50))){
-			g.setColor(Color.RED);
+			g.setColor(Color.BLUE);
 			g.drawString("YOU LOSE ", 350, 200);
 			thread.stop();
 		}
