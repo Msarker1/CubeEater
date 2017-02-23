@@ -98,7 +98,6 @@ public  class Move extends Applet implements KeyListener , Runnable{
 	
 	}
 	
-	
 	public void update(){
 		if(moved){
 			X--;
