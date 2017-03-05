@@ -57,7 +57,6 @@ public  class Move extends Applet implements KeyListener , Runnable{
 
 		player.draw(g, xCoor, yCoor);
 		cube.Draw(g,X ,Y );
-		//cube2.Draw(g,X,Z);
 		
 		System.out.println("xCoor: "+xCoor);
 		System.out.println("yCoor: "+yCoor);
